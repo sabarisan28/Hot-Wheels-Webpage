@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hot Wheels Set</title>
+  <style>
+    :root {
+      --black: #000;
+      --navy: #001f3f;
+      --skyblue: #1e90ff;
+      --white: #f5f5f5;
+      --gray: #222;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--black);
+      color: var(--white);
+    }
+
+    /* NAVBAR */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background: var(--navy);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.7);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--skyblue);
+    }
+
+    .logo img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid var(--skyblue);
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--white);
+      margin: 0 15px;
+      font-weight: 600;
+      position: relative;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--skyblue);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: var(--skyblue);
+      transition: 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .nav-icons {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .cart-icon {
+      font-size: 22px;
+      cursor: pointer;
+      color: var(--skyblue);
+      position: relative;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background: var(--white);
+      color: var(--navy);
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .login-btn {
+      background: var(--skyblue);
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .cart-btn {
+  background: var(--skyblue);
+  border: none;
+  color: var(--white);
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.cart-btn:hover {
+  background: var(--navy);
+  border: 1px solid var(--skyblue);
+}
+
+
+    .login-btn:hover {
+      background: var(--navy);
+      border: 1px solid var(--skyblue);
+    }
+
+    /* HOME */
+    #home {
+      background: url('1685581b3f31942acc035a6696a3d0d7.jpg') center/cover no-repeat;
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    #home h1 {
+      font-size: 45px;
+      text-shadow: 2px 2px 8px #000;
+      color: var(--skyblue);
+    }
+
+    #home p {
+      font-size: 18px;
+      width: 60%;
+      margin-top: 10px;
+    }
+
+    .shop-btn {
+      margin-top: 20px;
+      background: var(--navy);
+      color: var(--white);
+      padding: 10px 20px;
+      border: 1px solid var(--skyblue);
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .shop-btn:hover {
+      background: var(--skyblue);
+    }
+
+    /* CATEGORIES */
+    #categories {
+      padding: 60px 40px;
+      text-align: center;
+    }
+
+    .category-box {
+      margin-top: 30px;
+    }
+
+    .age-buttons button {
+      background: var(--navy);
+      color: white;
+      border: 1px solid var(--skyblue);
+      margin: 8px;
+      padding: 10px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .age-buttons button:hover {
+      background: var(--skyblue);
+      color: var(--black);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .product {
+      background: var(--gray);
+      border: 1px solid var(--navy);
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .product:hover {
+      transform: scale(1.05);
+      border-color: var(--skyblue);
+    }
+
+    .product img {
+      width: 100%;
+      border-radius: 10px;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .product h4 {
+      color: var(--skyblue);
+      margin: 10px 0 5px;
+    }
+
+    .price {
+      color: var(--white);
+      font-weight: bold;
+    }
+
+    .stars {
+      color: gold;
+      font-size: 16px;
+      margin: 5px 0;
+    }
+
+    .add-btn {
+      background: var(--skyblue);
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 5px;
+    }
+    .buy-btn {
+  background: var(--navy);
+  color: var(--white);
+  border: 1px solid var(--skyblue);
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 5px;
+}
+
+.buy-btn:hover {
+  background: var(--skyblue);
+  color: var(--black);
+}
+.add-btn {
+  background: var(--skyblue);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 5px;
+}
+
+.add-btn:hover {
+  background: var(--navy);
+  border: 1px solid var(--skyblue);
+}
+
+
+.button-group {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.buy-btn {
+  background: var(--navy);
+  color: var(--white);
+  border: 1px solid var(--skyblue);
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 5px;
+}
+
+.buy-btn:hover {
+  background: var(--skyblue);
+  color: var(--black);
+}
+
+.button-group {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+
+    .add-btn:hover {
+      background: var(--navy);
+      border: 1px solid var(--skyblue);
+    }
+
+    .cart-items {
+      margin-top: 25px;
+      text-align: left;
+      border-top: 1px solid #333;
+      padding-top: 15px;
+    }
+
+    .cart-items h3 {
+      color: var(--skyblue);
+    }
+
+    .cart-item {
+      margin: 8px 0;
+      border-bottom: 1px solid #333;
+      padding: 5px 0;
+      color: #ccc;
+    }
+
+    footer {
+      background: var(--navy);
+      padding: 20px;
+      text-align: center;
+      color: #aaa;
+      margin-top: 60px;
+    }
+
+    /* LOGIN POPUP */
+    #loginPopup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 200;
+    }
+
+    .login-box {
+      background: var(--navy);
+      padding: 25px;
+      border-radius: 10px;
+      width: 320px;
+      text-align: center;
+      box-shadow: 0 0 10px var(--skyblue);
+    }
+
+    .login-box h2 {
+      color: var(--skyblue);
+      margin-bottom: 15px;
+    }
+
+    .login-box input {
+      width: 90%;
+      margin: 10px 0;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      background: var(--gray);
+      color: var(--white);
+    }
+
+    .login-box button {
+      background: var(--skyblue);
+      color: var(--white);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .login-box button:hover {
+      background: var(--black);
+      border: 1px solid var(--skyblue);
+    }
+    .button-group {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <img src="hot-wheels-pictures-1199-x-900-r98b96ztwy8c2jdw.jpg" alt="logo">
+      Hot Wheels Set
+    </div>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#categories">Categories</a>
+      <a href="#about">About Us</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="nav-icons">
+      <button class="cart-btn">
+  Cart <span class="cart-count" id="cartCount">0</span>
+</button>
+
+      <button class="login-btn" onclick="showLogin()">Login</button>
+    </div>
+  </header>
+
+  <!-- HOME -->
+  <section id="home">
+    <h1>Welcome to Hot Wheels Set</h1>
+    <p>Explore our world of premium toy cars and tracks. Designed for fun, speed, and imagination.</p>
+    <button class="shop-btn" onclick="scrollToSection('categories')">Shop Now</button>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section id="categories">
+    <h2>Our Categories</h2>
+    <div class="category-box">
+      <h3>By Age</h3>
+      <div class="age-buttons">
+        <button onclick="showProducts('months')">1–12 Months</button>
+        <button onclick="showProducts('years1to6')">1–6 Years</button>
+        <button onclick="showProducts('years6to12')">6–12 Years</button>
+        <button onclick="showProducts('collectors')">12+ Collectors</button>
+      </div>
+      <div id="byAgeProducts" class="product-grid"></div>
+      <div class="cart-items" id="cartByAge"></div>
+    </div>
+    <div class="category-box">
+      <h3>Best Sellers</h3>
+      <div id="bestSellers" class="product-grid"></div>
+      <div class="cart-items" id="cartBestSellers"></div>
+    </div>
+    <div class="category-box">
+      <h3>New Arrivals</h3>
+      <div id="newArrivals" class="product-grid"></div>
+      <div class="cart-items" id="cartNewArrivals"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about"><center>
+    <h2>About Us</h2></center>
+    <p>Hot Wheels Set is your ultimate destination for the fastest, coolest, and most collectible toy cars ever made! Since our inception, we've been passionate about delivering high-quality die-cast cars that ignite creativity and imagination in children and adults alike.</p>
+    <p>From thrilling race tracks to detailed collector editions, our mission is to fuel the passion for speed and design. We believe every car tells a story — and with Hot Wheels, that story races beyond limits!</p>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <center>
+    <h2>Contact Us</h2>
+    </center>
+    <div class="contact-info"><center>
+      <p>📍 Address: 123 Speed Lane, Race City, India</p>
+      <p>📞 Phone: +91 98765 43210</p>
+      <p>✉️ Email: <a href="mailto:support@hotwheelsset.com">support@hotwheelsset.com</a></p>
+      <p>Follow us on social media:</p>
+      <p>
+        <a href="#">🌐 Facebook</a> | 
+        <a href="#">🐦 Twitter</a> | 
+        <a href="#">📸 Instagram</a>
+      </p></center>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Hot Wheels Set — All Rights Reserved
+  </footer>
+
+  <!-- LOGIN POPUP -->
+  <div id="loginPopup">
+    <div class="login-box">
+      <h2>Login</h2>
+      <input type="text" id="loginName" placeholder="Full Name" required>
+      <input type="tel" id="loginPhone" placeholder="Phone Number" required>
+      <input type="email" id="loginEmail" placeholder="Email Address" required>
+      <input type="password" id="loginPassword" placeholder="Password" required>
+      <button onclick="submitLogin()">Login</button>
+      <button onclick="closeLogin()" style="background:red;">Close</button>
+    </div>
+  </div>
+
+  <script>
+  const products = {
+    months: [
+      { name: "Baby Car 1", price: 499, img: "download (21).jpeg" },
+      { name: "Baby Car 2", price: 519, img: "download (20).jpeg" },
+      { name: "Baby Car 3", price: 539, img: "download (19).jpeg" },
+      { name: "Baby Car 4", price: 559, img: "download (18).jpeg" },
+      { name: "Baby Car 5", price: 579, img: "download (17).jpeg" },
+      { name: "Baby Car 6", price: 599, img: "download (16).jpeg" },
+      { name: "Baby Car 7", price: 619, img: "download (15).jpeg" },
+      { name: "Baby Car 8", price: 639, img: "download (14).jpeg" },
+      { name: "Baby Car 9", price: 659, img: "download (13).jpeg" },
+      { name: "Baby Car 10", price: 679, img:"download (12).jpeg" },
+      { name: "Baby Car 11", price: 699, img: "download (11).jpeg" },
+      { name: "Baby Car 12", price: 719, img: "download (10).jpeg" }
+    ],
+    years1to6: [
+      { name: "Fun Racer 1", price: 599, img: "download (1).jpeg" },
+      { name: "Fun Racer 2", price: 629, img: "images (2).jpeg" },
+      { name: "Fun Racer 3", price: 659, img: "images.jpeg" },
+      { name: "Fun Racer 4", price: 689, img: "images (1).jpeg" },
+      { name: "Fun Racer 5", price: 719, img: "images (3).jpeg" },
+      { name: "Fun Racer 6", price: 749, img: "download (2).jpeg" },
+      { name: "Fun Racer 7", price: 779, img: "download (3).jpeg" },
+      { name: "Fun Racer 8", price: 809, img: "download (4).jpeg" },
+      { name: "Fun Racer 9", price: 839, img: "download (5).jpeg" },
+      { name: "Fun Racer 10", price: 869, img: "download (6).jpeg" },
+      { name: "Fun Racer 11", price: 899, img: "download (7).jpeg" },
+      { name: "Fun Racer 12", price: 929, img: "download (8).jpeg" }
+    ],
+    years6to12: [
+      { name: "Speedster 1", price: 699, img: "download (22).jpeg" },
+      { name: "Speedster 2", price: 724, img: "download (23).jpeg" },
+      { name: "Speedster 3", price: 749, img: "download (24).jpeg" },
+      { name: "Speedster 4", price: 774, img: "download (25).jpeg" },
+      { name: "Speedster 5", price: 799, img: "download (26).jpeg" },
+      { name: "Speedster 6", price: 824, img: "download (27).jpeg" },
+      { name: "Speedster 7", price: 849, img: "download (28).jpeg" },
+      { name: "Speedster 8", price: 874, img: "download (29).jpeg" },
+      { name: "Speedster 9", price: 899, img: "download (30).jpeg" },
+      { name: "Speedster 10", price: 924, img: "images (4).jpeg" },
+      { name: "Speedster 11", price: 949, img: "images (5).jpeg" },
+      { name: "Speedster 12", price: 974, img: "images (6).jpeg" }
+    ],
+    collectors: [
+      { name: "Collector Edition 1", price: 999, img: "images (7).jpeg" },
+      { name: "Collector Edition 2", price: 1049, img: "images (8).jpeg" },
+      { name: "Collector Edition 3", price: 1099, img: "images (9).jpeg" },
+      { name: "Collector Edition 4", price: 1149, img: "download (31).jpeg" },
+      { name: "Collector Edition 5", price: 1199, img: "download (32).jpeg" },
+      { name: "Collector Edition 6", price: 1249, img: "download (33).jpeg" },
+      { name: "Collector Edition 7", price: 1299, img: "download (34).jpeg" },
+      { name: "Collector Edition 8", price: 1349, img: "download (35).jpeg" },
+      { name: "Collector Edition 9", price: 1399, img: "download (36).jpeg" },
+      { name: "Collector Edition 10", price: 1449, img: "download (37).jpeg" },
+      { name: "Collector Edition 11", price: 1499, img: "images (10).jpeg" },
+      { name: "Collector Edition 12", price: 1549, img: "images (11).jpeg" }
+    ],
+    bestSellers: [
+      { name: "Top Car 1", price: 799, img: "images (1).jpeg" },
+      { name: "Top Car 2", price: 834, img: "images (10).jpeg" },
+      { name: "Top Car 3", price: 869, img: "images (12).jpeg" },
+      { name: "Top Car 4", price: 904, img: "images (11).jpeg" },
+      { name: "Top Car 5", price: 939, img: "images (13).jpeg" },
+      { name: "Top Car 6", price: 974, img: "download (36).jpeg" },
+      { name: "Top Car 7", price: 1009, img: "download (34).jpeg" },
+      { name: "Top Car 8", price: 1044, img: "download (33).jpeg" },
+      { name: "Top Car 9", price: 1079, img: "download (30).jpeg" },
+      { name: "Top Car 10", price: 1114, img: "download (29).jpeg" },
+      { name: "Top Car 11", price: 1149, img: "download (28).jpeg" },
+      { name: "Top Car 12", price: 1184, img: "download (37).jpeg" }
+    ],
+    newArrivals: [
+      { name: "New Arrival 1", price: 899, img: "download (20).jpeg", age: "3 Years" },
+      { name: "New Arrival 2", price: 939, img: "download (36).jpeg", age: "4 Years" },
+      { name: "New Arrival 3", price: 979, img: "download (31).jpeg", age: "5 Years" },
+      { name: "New Arrival 4", price: 1019, img: "download (37).jpeg", age: "6 Years" },
+      { name: "New Arrival 5", price: 1059, img: "download (35).jpeg", age: "7 Years" },
+      { name: "New Arrival 6", price: 1099, img: "download (33).jpeg", age: "8 Years" }
+    ]
+  };
+
+  let cartCount = 0;
+
+  function showProducts(type) {
+    const container = document.getElementById('byAgeProducts');
+    container.innerHTML = '';
+    products[type].forEach((p, index) => {
+      const div = document.createElement('div');
+      div.className = 'product';
+      div.innerHTML = `
+        <img src="${p.img}" alt="${p.name}">
+        <h4>${p.name}</h4>
+        <div class="stars">★★★★★</div>
+        <p class="price">₹${p.price}</p>
+        <div class="button-group">
+  <button class="add-btn" onclick="addToCart('${type}', ${index})">Add to Cart</button>
+  <button class="buy-btn" onclick="buyNow('${type}', ${index})">Buy Now</button>
+</div>
+
+      `;
+      container.appendChild(div);
+    });
+  }
+
+  function loadStaticSections() {
+    const best = document.getElementById('bestSellers');
+    products.bestSellers.forEach((p, i) => {
+      const div = document.createElement('div');
+      div.className = 'product';
+      div.innerHTML = `
+        <img src="${p.img}" alt="${p.name}">
+        <h4>${p.name}</h4>
+        <div class="stars">★★★★★</div>
+        <p class="price">₹${p.price}</p>
+        <div class="button-group">
+  <button class="add-btn" onclick="addToCart('bestSellers', ${i})">Add to Cart</button>
+  <button class="buy-btn" onclick="buyNow('bestSellers', ${i})">Buy Now</button>
+</div>
+
+      `;
+      best.appendChild(div);
+    });
+
+    const newA = document.getElementById('newArrivals');
+    products.newArrivals.forEach((p, i) => {
+      const div = document.createElement('div');
+      div.className = 'product';
+      div.innerHTML = `
+        <img src="${p.img}" alt="${p.name}">
+        <h4>${p.name}</h4>
+        <div class="stars">★★★★★</div>
+        <p>Age: ${p.age}</p>
+        <div class="button-group">
+  <button class="add-btn" onclick="addToCart('${type}', ${index})">Add to Cart</button>
+  <button class="buy-btn" onclick="buyNow('${type}', ${index})">Buy Now</button>
+</div>
+
+      `;
+      newA.appendChild(div);
+    });
+  }
+
+  function addToCart(type, index) {
+    cartCount++;
+    document.getElementById('cartCount').innerText = cartCount;
+    const item = products[type][index];
+    const cartDiv = document.getElementById(
+      type === 'bestSellers' ? 'cartBestSellers' :
+      type === 'newArrivals' ? 'cartNewArrivals' :
+      'cartByAge'
+    );
+
+    const p = document.createElement('div');
+    p.className = 'cart-item';
+    p.textContent = `${item.name} — ₹${item.price}`;
+    cartDiv.appendChild(p);
+  }
+  function buyNow(type, index) {
+  const item = products[type][index];
+  alert("Proceeding to buy: " + item.name + " — ₹" + item.price);
+}
+
+function scrollToSection(id) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+  function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // LOGIN FUNCTIONS
+  function showLogin() {
+    document.getElementById('loginPopup').style.display = 'flex';
+  }
+
+  function closeLogin() {
+    document.getElementById('loginPopup').style.display = 'none';
+  }
+
+  function submitLogin() {
+    const name = document.getElementById('loginName').value.trim();
+    const phone = document.getElementById('loginPhone').value.trim();
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value.trim();
+
+    if (!name || !phone || !email || !password) {
+      alert("Please fill all fields.");
+      return;
+    }
+    alert("✅ Successful Login!");
+    closeLogin();
+  }
+
+  loadStaticSections();
+  </script>
+</body>
+</html>
