@@ -294,7 +294,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 **Sabarisan**
 - GitHub: [@sabarisan28](https://github.com/sabarisan28)
-- Email: aathisenthil18@gmail.com
+- Email: sabarisan5070@gmail.com
 
 ## 🙏 Acknowledgments
 
@@ -304,7 +304,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 📞 Support
 
-For support, email aathisenthil18@gmail.com or open an issue in the GitHub repository.
+For support, email sabarisan5070@gmail.com or open an issue in the GitHub repository.
 
 ## 🔄 Version History
 
